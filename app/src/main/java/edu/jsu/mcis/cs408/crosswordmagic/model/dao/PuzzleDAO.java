@@ -91,7 +91,7 @@ public class PuzzleDAO {
 
             /*
 
-            INSERT YOUR CODE HERE
+            !!!!!!! INSERT YOUR CODE HERE !!!!!!!
 
             */
             if (!params.isEmpty())
@@ -114,7 +114,7 @@ public class PuzzleDAO {
 
                     /*
 
-                    INSERT YOUR CODE HERE
+                    !!!!!!! INSERT YOUR CODE HERE !!!!!!!
 
                     */
 

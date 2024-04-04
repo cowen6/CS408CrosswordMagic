@@ -47,8 +47,6 @@ public class DAOFactory extends SQLiteOpenHelper {
         db.execSQL(properties.getProperty("sql_create_words_table"));
         db.execSQL(properties.getProperty("sql_create_guesses_table"));
 
-        PuzzleDAO puzzleDAO = new PuzzleDAO(this);
-
         addInitialDataFromCSV(db);
 
     }
@@ -118,7 +116,7 @@ public class DAOFactory extends SQLiteOpenHelper {
 
                         /*
 
-                        INSERT YOUR CODE HERE
+                        !!!!!!! INSERT YOUR CODE HERE !!!!!!!  (populate data params for word table)
 
                          */
 
