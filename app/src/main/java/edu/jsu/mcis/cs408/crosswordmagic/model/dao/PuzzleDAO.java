@@ -89,11 +89,13 @@ public class PuzzleDAO {
 
             /* get data for new puzzle */
 
-            /*
+            /*!!!!!!! INSERT YOUR CODE HERE !!!!!!!*/
 
-            !!!!!!! INSERT YOUR CODE HERE !!!!!!!
+            params.put(daoFactory.getProperty("sql_field_name"), cursor.getString(1));
+            params.put(daoFactory.getProperty("sql_field_description"), cursor.getString(2));
+            params.put(daoFactory.getProperty("sql_field_height"), String.valueOf(cursor.getInt(3)));
+            params.put(daoFactory.getProperty("sql_field_width"), String.valueOf(cursor.getInt(4)));
 
-            */
             if (!params.isEmpty())
                 puzzle = new Puzzle(params);
 
@@ -112,11 +114,16 @@ public class PuzzleDAO {
 
                     /* get data for the next word in the puzzle */
 
-                    /*
+                    /*!!!!!!! INSERT YOUR CODE HERE !!!!!!!*/
 
-                    !!!!!!! INSERT YOUR CODE HERE !!!!!!!
-
-                    */
+                    params.put(daoFactory.getProperty("sql_field_id"), String.valueOf(cursor.getInt(0)));
+                    params.put(daoFactory.getProperty("sql_field_puzzleid"), String.valueOf(cursor.getInt(1)));
+                    params.put(daoFactory.getProperty("sql_field_row"), String.valueOf(cursor.getInt(2)));
+                    params.put(daoFactory.getProperty("sql_field_column"), String.valueOf(cursor.getInt(3)));
+                    params.put(daoFactory.getProperty("sql_field_box"), String.valueOf(cursor.getInt(4)));
+                    params.put(daoFactory.getProperty("sql_field_direction"), String.valueOf(cursor.getInt(5)));
+                    params.put(daoFactory.getProperty("sql_field_word"), cursor.getString(6));
+                    params.put(daoFactory.getProperty("sql_field_clue"), cursor.getString(7));
 
                     if (!params.isEmpty())
                         puzzle.addWordToPuzzle(new Word(params));
