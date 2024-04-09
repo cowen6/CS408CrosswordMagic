@@ -9,13 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.beans.PropertyChangeEvent;
+
+import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.databinding.FragmentPuzzleBinding;
 
-public class PuzzleFragment extends Fragment {
+public class PuzzleFragment extends Fragment implements AbstractView {
 
     private static final String TAG = "PuzzleFragment";
-
     private FragmentPuzzleBinding binding;
+    private CrosswordMagicController controller;
 
     @Nullable
     @Override
@@ -31,9 +34,19 @@ public class PuzzleFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Add reference to this fragment to controller
+        /* get controller, register Fragment as a View */
+        this.controller = ((MainActivity)getContext()).getController();
+        controller.addView(this);
+    }
+
+    @Override
+    public void modelPropertyChange(final PropertyChangeEvent evt) {
+
+        String name = evt.getPropertyName();
+        String value = evt.getNewValue().toString();
+
     }
 
 }

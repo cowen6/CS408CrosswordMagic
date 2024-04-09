@@ -14,11 +14,8 @@ import edu.jsu.mcis.cs408.crosswordmagic.model.CrosswordMagicModel;
 
 public class MainActivity extends AppCompatActivity implements AbstractView {
 
-
     private final String TAG = "MainActivity";
-
     private ActivityMainBinding binding;
-
     private CrosswordMagicController controller;
 
     @Override
@@ -54,6 +51,6 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
     }
 
-    //Add method to return reference to controller
+    public CrosswordMagicController getController() { return controller; }
 
 }

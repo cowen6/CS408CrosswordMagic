@@ -28,5 +28,19 @@ public class CrosswordMagicModel extends AbstractModel {
         firePropertyChange(CrosswordMagicController.TEST_PROPERTY, null, wordCount);
 
     }
+    public void getGridDimensions() {
+        Integer[] dimensions = new Integer[2];
+        dimensions[0] = puzzle.getHeight();
+        dimensions[1] = puzzle.getWidth();
+        firePropertyChange(CrosswordMagicController.GRID_DIMENSION_PROPERTY, null, dimensions);
+    }
+    public void getGridLetters() {
+        Character[][] letters = puzzle.getLetters();
+        firePropertyChange(CrosswordMagicController.GRID_LETTERS_PROPERTY, null, letters);
+    }
+    public void getGridNumbers() {
+        Integer[][] numbers = puzzle.getNumbers();
+        firePropertyChange(CrosswordMagicController.GRID_NUMBERS_PROPERTY, null, numbers);
+    }
 
 }
