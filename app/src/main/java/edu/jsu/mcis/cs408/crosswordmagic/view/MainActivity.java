@@ -52,12 +52,8 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
         String name = evt.getPropertyName();
         String value = evt.getNewValue().toString();
 
-        if (name.equals(CrosswordMagicController.TEST_PROPERTY)) {
-
-            binding.output.setText("Number of Words in Default Puzzle: " + value);
-
-        }
-
     }
+
+    //Add method to return reference to controller
 
 }

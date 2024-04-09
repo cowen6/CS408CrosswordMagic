@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Crossword Magic</string>
+    <string name="clue_header_across">Across</string>
+    <string name="clue_header_down">Down</string>
 </resources>
