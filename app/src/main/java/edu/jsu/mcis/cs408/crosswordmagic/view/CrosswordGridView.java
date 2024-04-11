@@ -2,9 +2,11 @@ package edu.jsu.mcis.cs408.crosswordmagic.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.InputType;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -12,9 +14,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import java.beans.PropertyChangeEvent;
 import java.util.Arrays;
@@ -22,6 +26,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 
 public class CrosswordGridView extends View implements AbstractView {
@@ -299,11 +304,38 @@ public class CrosswordGridView extends View implements AbstractView {
                 int n = numbers[y][x];
 
                 if (n != 0) {
-                    String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
-                    Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle(R.string.dialog_title);
+                    builder.setMessage(R.string.dialog_message);
+                    final EditText input = new EditText(context);
+                    input.setInputType(InputType.TYPE_CLASS_TEXT);
+                    builder.setView(input);
+                    builder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface d, int i) {
+                            String userInput = input.getText().toString();
+                            //add call to controller to submit guess
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface d, int i) {
+                            d.cancel();
+                        }
+                    });
+                    AlertDialog aboutDialog = builder.show();
+
+
+                    //String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
+                    //Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
                 }
 
             }
+
+            /*Need to recall getGridLetters/Numbers?
+            * show toast depending on if guess was correct or not
+            * add guessed words to database for saving
+            * return string id for guess toasts?*/
 
             return false;
 

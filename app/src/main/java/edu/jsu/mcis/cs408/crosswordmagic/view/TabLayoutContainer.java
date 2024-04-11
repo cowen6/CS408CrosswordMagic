@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.databinding.TabContainerBinding;
 
 public class TabLayoutContainer extends Fragment {
@@ -42,10 +43,10 @@ public class TabLayoutContainer extends Fragment {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if (position == 0) {
-                    tab.setText("Puzzle");
+                    tab.setText(getString(R.string.tab_puzzle));
                 }
                 else {
-                    tab.setText("Clues");
+                    tab.setText(getString(R.string.tab_clues));
                 }
             }
         }).attach();

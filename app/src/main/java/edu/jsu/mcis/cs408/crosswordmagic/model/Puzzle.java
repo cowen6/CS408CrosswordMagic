@@ -96,8 +96,8 @@ public class Puzzle {
         }
 
         /* add word to guessed list (for development only!) */
-        /*Only meant for checking that all words are received and assigned correctly*/
-        addWordToGuessed(key); // remove this later!
+
+        //addWordToGuessed(key); // remove this later!
 
     }
 
@@ -118,7 +118,7 @@ public class Puzzle {
         if (across != null) {
             if (across.getWord().equals(guess) && !(guessed.contains(acrossKey))) {
                 result = WordDirection.ACROSS;
-                addWordToGuessed(downKey);
+                addWordToGuessed(acrossKey);
             }
         }
 
