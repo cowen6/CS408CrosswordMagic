@@ -41,8 +41,8 @@ public class ClueFragment extends Fragment implements AbstractView {
         controller.addView(this);
 
         /* Add clues to corresponding outputs */
-        //binding.aContainer.setText();
-        //binding.dContainer.setText();
+        controller.getCluesAcross();
+        controller.getCluesDown();
     }
 
     @Override
@@ -50,6 +50,13 @@ public class ClueFragment extends Fragment implements AbstractView {
 
         String name = evt.getPropertyName();
         String value = evt.getNewValue().toString();
+
+        if (name.equals(CrosswordMagicController.CLUES_ACROSS_PROPERTY)) {
+            binding.aContainer.setText(value);
+        }
+        if (name.equals(CrosswordMagicController.CLUES_DOWN_PROPERTY)) {
+            binding.dContainer.setText(value);
+        }
 
     }
 

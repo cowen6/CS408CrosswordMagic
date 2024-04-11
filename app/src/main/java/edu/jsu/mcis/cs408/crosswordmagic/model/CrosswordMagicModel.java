@@ -42,5 +42,13 @@ public class CrosswordMagicModel extends AbstractModel {
         Integer[][] numbers = puzzle.getNumbers();
         firePropertyChange(CrosswordMagicController.GRID_NUMBERS_PROPERTY, null, numbers);
     }
+    public void getCluesAcross() {
+        String across = puzzle.getCluesAcross();
+        firePropertyChange(CrosswordMagicController.CLUES_ACROSS_PROPERTY, null, across);
+    }
+    public void getCluesDown() {
+        String down = puzzle.getCluesDown();
+        firePropertyChange(CrosswordMagicController.CLUES_DOWN_PROPERTY, null, down);
+    }
 
 }
