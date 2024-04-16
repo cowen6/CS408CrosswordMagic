@@ -46,6 +46,7 @@ public class CrosswordGridView extends View implements AbstractView {
 
     private Character[][] letters;
     private Integer[][] numbers;
+    private Context context;
 
     public CrosswordGridView(Context context, AttributeSet attrs) {
 
@@ -63,6 +64,7 @@ public class CrosswordGridView extends View implements AbstractView {
         setOnTouchListener(new OnTouchHandler(context));
 
         this.controller = ((MainActivity)context).getController();
+        this.context = context;
 
         controller.addView(this);
 
@@ -280,6 +282,16 @@ public class CrosswordGridView extends View implements AbstractView {
 
         }
 
+        if (name.equals(CrosswordMagicController.CHECK_GUESS_PROPERTY)) {
+            //Redrew grid with new word if correct?
+
+            String toast = getContext().getResources().getString((Integer) value);
+
+            Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
+
+            //add controller call to check is puzzle solved???
+        }
+
     }
 
     private class OnTouchHandler implements View.OnTouchListener {
@@ -305,37 +317,35 @@ public class CrosswordGridView extends View implements AbstractView {
 
                 if (n != 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle(R.string.dialog_title);
-                    builder.setMessage(R.string.dialog_message);
+                    builder.setTitle(getResources().getString(R.string.dialog_title));
+                    builder.setMessage(getResources().getString(R.string.dialog_message));
                     final EditText input = new EditText(context);
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
                     builder.setView(input);
-                    builder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(getResources().getString(R.string.submit), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface d, int i) {
-                            String userInput = input.getText().toString();
-                            //add call to controller to submit guess
+                            String userInput = input.getText().toString().toUpperCase();
+                            controller.setGuessBox(n);
+                            controller.setGuessWord(userInput);
+                            controller.getCheckGuess();
+                            //Toast.makeText(context, "Box: " + n + " Guess: " + userInput, Toast.LENGTH_SHORT).show();
                         }
                     });
-                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface d, int i) {
                             d.cancel();
                         }
                     });
                     AlertDialog aboutDialog = builder.show();
-
-
-                    //String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
-                    //Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             /*Need to recall getGridLetters/Numbers?
             * show toast depending on if guess was correct or not
-            * add guessed words to database for saving
-            * return string id for guess toasts?*/
+            * add guessed words to database for saving*/
 
             return false;
 

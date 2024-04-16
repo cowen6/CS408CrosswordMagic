@@ -8,6 +8,9 @@ public class CrosswordMagicController extends AbstractController {
     public static final String GRID_NUMBERS_PROPERTY = "GridNumbers";
     public static final String CLUES_ACROSS_PROPERTY = "CluesAcross";
     public static final String CLUES_DOWN_PROPERTY = "CluesDown";
+    public static final String CHECK_GUESS_PROPERTY = "CheckGuess";
+    public static final String GUESS_WORD_PROPERTY = "GuessWord";
+    public static final String GUESS_BOX_PROPERTY = "GuessBox";
 
     public void getTestProperty(String value) {
         getModelProperty(TEST_PROPERTY);
@@ -17,4 +20,7 @@ public class CrosswordMagicController extends AbstractController {
     public void getGridNumbers() { getModelProperty(GRID_NUMBERS_PROPERTY); }
     public void getCluesAcross() { getModelProperty(CLUES_ACROSS_PROPERTY); }
     public void getCluesDown() { getModelProperty(CLUES_DOWN_PROPERTY); }
+    public void getCheckGuess() { getModelProperty(CHECK_GUESS_PROPERTY); }
+    public void setGuessWord(String input) { setModelProperty(GUESS_WORD_PROPERTY, input); }
+    public void setGuessBox(Integer box) { setModelProperty(GUESS_BOX_PROPERTY, box); }
 }

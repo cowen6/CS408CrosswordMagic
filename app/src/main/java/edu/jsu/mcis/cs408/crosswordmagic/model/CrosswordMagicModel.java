@@ -3,6 +3,7 @@ package edu.jsu.mcis.cs408.crosswordmagic.model;
 import android.content.Context;
 import android.util.Log;
 
+import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.DAOFactory;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.PuzzleDAO;
@@ -12,11 +13,15 @@ public class CrosswordMagicModel extends AbstractModel {
     private final int DEFAULT_PUZZLE_ID = 1;
 
     private Puzzle puzzle;
+    private String wordguess = "";
+    private int boxguess = 0;
 
     public CrosswordMagicModel(Context context) {
 
         DAOFactory daoFactory = new DAOFactory(context);
         PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
+        /*Pull dauFactory out of method
+        * create new dao for guesses to add guesses to table*/
 
         this.puzzle = puzzleDAO.find(DEFAULT_PUZZLE_ID);
 
@@ -49,6 +54,37 @@ public class CrosswordMagicModel extends AbstractModel {
     public void getCluesDown() {
         String down = puzzle.getCluesDown();
         firePropertyChange(CrosswordMagicController.CLUES_DOWN_PROPERTY, null, down);
+    }
+    public void getCheckGuess() {
+        if (this.boxguess != 0 && !this.wordguess.equals("")) {
+            WordDirection guessdirection = puzzle.checkGuess(boxguess, wordguess);
+            /* Check if guess was correct, return corresponding toast */
+            if (guessdirection != null) {
+                //add correct guess to database??
+                int correct = R.string.guess_correct;
+                firePropertyChange(CrosswordMagicController.CHECK_GUESS_PROPERTY, null, correct);
+                getGridLetters();
+            }
+            else {
+                int incorrect = R.string.guess_incorrect;
+                firePropertyChange(CrosswordMagicController.CHECK_GUESS_PROPERTY, null, incorrect);
+            }
+        }
+        /* Revert word and box to default */
+        this.boxguess = 0;
+        this.wordguess = "";
+    }
+    public void setGuessWord(String word) {
+        String oldword = this.wordguess;
+        this.wordguess = word;
+        Log.i("Model", word);
+        firePropertyChange(CrosswordMagicController.GUESS_WORD_PROPERTY, oldword, word);
+    }
+    public void setGuessBox(Integer box) {
+        int oldbox = this.boxguess;
+        this.boxguess = box;
+        Log.i("Model", String.valueOf(box));
+        firePropertyChange(CrosswordMagicController.GUESS_BOX_PROPERTY, oldbox, box);
     }
 
 }
