@@ -3,9 +3,12 @@ package edu.jsu.mcis.cs408.crosswordmagic.model;
 import android.content.Context;
 import android.util.Log;
 
+import java.util.HashMap;
+
 import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.DAOFactory;
+import edu.jsu.mcis.cs408.crosswordmagic.model.dao.GuessDAO;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.PuzzleDAO;
 
 public class CrosswordMagicModel extends AbstractModel {
@@ -15,13 +18,13 @@ public class CrosswordMagicModel extends AbstractModel {
     private Puzzle puzzle;
     private String wordguess = "";
     private int boxguess = 0;
+    private DAOFactory daoFactory;
 
     public CrosswordMagicModel(Context context) {
 
-        DAOFactory daoFactory = new DAOFactory(context);
+        this.daoFactory = new DAOFactory(context);
         PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
-        /*Pull dauFactory out of method
-        * create new dao for guesses to add guesses to table*/
+        /*create new dao for guesses to add guesses to table*/
 
         this.puzzle = puzzleDAO.find(DEFAULT_PUZZLE_ID);
 
@@ -60,7 +63,17 @@ public class CrosswordMagicModel extends AbstractModel {
             WordDirection guessdirection = puzzle.checkGuess(boxguess, wordguess);
             /* Check if guess was correct, return corresponding toast */
             if (guessdirection != null) {
-                //add correct guess to database??
+                //add correct guess to database
+                GuessDAO guessDAO = daoFactory.getGuessDAO();
+                HashMap<String, String> params = new HashMap<>();
+
+                int puzzleid, wordid;
+                //???????????HOW TO GET THE WORD AND PUZZLE IDS FOR TABLE INSERTION?????????????????
+                params.put(daoFactory.getProperty("sql_field_puzzleid"), String.valueOf(puzzleid));
+                params.put(daoFactory.getProperty("sql_field_wordid"), String.valueOf(wordid));
+
+                guessDAO.create(params);
+
                 int correct = R.string.guess_correct;
                 firePropertyChange(CrosswordMagicController.CHECK_GUESS_PROPERTY, null, correct);
                 getGridLetters();

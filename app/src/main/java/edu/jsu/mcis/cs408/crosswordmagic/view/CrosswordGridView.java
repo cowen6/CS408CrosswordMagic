@@ -283,10 +283,7 @@ public class CrosswordGridView extends View implements AbstractView {
         }
 
         if (name.equals(CrosswordMagicController.CHECK_GUESS_PROPERTY)) {
-            //Redrew grid with new word if correct?
-
             String toast = getContext().getResources().getString((Integer) value);
-
             Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
 
             //add controller call to check is puzzle solved???
@@ -342,10 +339,6 @@ public class CrosswordGridView extends View implements AbstractView {
                 }
 
             }
-
-            /*Need to recall getGridLetters/Numbers?
-            * show toast depending on if guess was correct or not
-            * add guessed words to database for saving*/
 
             return false;
 

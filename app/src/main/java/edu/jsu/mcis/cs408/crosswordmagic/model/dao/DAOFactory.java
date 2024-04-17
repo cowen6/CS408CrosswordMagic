@@ -62,13 +62,13 @@ public class DAOFactory extends SQLiteOpenHelper {
 
     }
 
-    public PuzzleDAO getPuzzleDAO() {
-        return new PuzzleDAO(this);
-    }
+    public PuzzleDAO getPuzzleDAO() { return new PuzzleDAO(this); }
 
     public WordDAO getWordDAO() {
         return new WordDAO(this);
     }
+
+    public GuessDAO getGuessDAO() { return new GuessDAO(this); }
 
     public String getProperty(String key) {
         return (properties.getProperty(key));
