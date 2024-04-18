@@ -67,11 +67,16 @@ public class CrosswordMagicModel extends AbstractModel {
                 GuessDAO guessDAO = daoFactory.getGuessDAO();
                 HashMap<String, String> params = new HashMap<>();
 
-                int puzzleid, wordid;
-                //???????????HOW TO GET THE WORD AND PUZZLE IDS FOR TABLE INSERTION?????????????????
+                String wordkey = boxguess + guessdirection.toString();
+                Log.i("Model", wordkey);
+                Word word = puzzle.getWord(wordkey);
+                int puzzleid = word.getPuzzleid();
+                int wordid = word.getId();
+                Log.i("Model", "guess: " + wordguess + " Word object: " + word.getWord());
+                Log.i("Model", "puzzleid: " + puzzleid + " wordid: " + wordid);
+
                 params.put(daoFactory.getProperty("sql_field_puzzleid"), String.valueOf(puzzleid));
                 params.put(daoFactory.getProperty("sql_field_wordid"), String.valueOf(wordid));
-
                 guessDAO.create(params);
 
                 int correct = R.string.guess_correct;
