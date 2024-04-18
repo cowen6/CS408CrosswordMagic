@@ -11,13 +11,18 @@ import androidx.annotation.Nullable;
 
 import com.opencsv.*;
 
+import org.apache.commons.collections.collection.AbstractCollectionDecorator;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.model.Puzzle;
+import edu.jsu.mcis.cs408.crosswordmagic.model.PuzzleListItem;
 import edu.jsu.mcis.cs408.crosswordmagic.model.Word;
 import edu.jsu.mcis.cs408.crosswordmagic.model.WordDirection;
 
@@ -162,6 +167,51 @@ public class PuzzleDAO {
         }
 
         return puzzle;
+
+    }
+
+    public PuzzleListItem[] list(){
+
+        /* use this method if there is NOT already a SQLiteDatabase open */
+
+        SQLiteDatabase db = daoFactory.getWritableDatabase();
+        PuzzleListItem[] result = list(db);
+        db.close();
+        return result;
+    }
+
+    public PuzzleListItem[] list(SQLiteDatabase db) {
+
+        ArrayList<PuzzleListItem> puzzles = new ArrayList<>();
+
+        /* Query Database for puzzle ID and names (ordered by name)*/
+
+        String query = daoFactory.getProperty("sql_get_puzzle_list");
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+
+            cursor.moveToFirst();
+
+            do {
+
+                /* Create PuzzleListItem object for each Puzzle and Add to ArrayList */
+                Integer id = cursor.getInt(0);
+                String name = cursor.getString(1);
+
+                Log.i("PuzzleDAO", "Puzzle ID: " + id + "; Puzzle Name: " + name);
+
+                PuzzleListItem puzzle = new PuzzleListItem(id, name);
+                puzzles.add(puzzle);
+
+            }
+            while ( cursor.moveToNext() );
+
+            cursor.close();
+
+        }
+
+        return puzzles.toArray(new PuzzleListItem[]{});
 
     }
 

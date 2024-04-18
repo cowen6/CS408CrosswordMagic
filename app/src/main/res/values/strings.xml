@@ -1,13 +1,15 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Crossword Magic</string>
     <string name="clue_header_across">Across</string>
     <string name="clue_header_down">Down</string>
     <string name="tab_puzzle">Puzzle</string>
     <string name="tab_clues">Clues</string>
     <string name="dialog_title">Word Guess</string>
-    <string name="dialog_message">Please enter a word to guess either across or down.\nTap Submit to guess, or Cancel to go back.</string>
+    <string name="dialog_message">Please enter a word to guess (For either across or down).\nTap Submit to guess, or Cancel to go back.</string>
     <string name="guess_correct">Congratulation, you guessed correctly!</string>
     <string name="guess_incorrect">Sorry, your guess was incorrect.</string>
-    <string name="submit">SUBMIT</string>
-    <string name="cancel">CANCEL</string>
+    <string name="button_play">Play Puzzle</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="crossword_magic_cover">Crossword Magic Cover</string>
 </resources>

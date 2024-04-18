@@ -24,9 +24,17 @@ public class CrosswordMagicModel extends AbstractModel {
 
         this.daoFactory = new DAOFactory(context);
         PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
-        /*create new dao for guesses to add guesses to table*/
 
         this.puzzle = puzzleDAO.find(DEFAULT_PUZZLE_ID);
+
+    }
+
+    public CrosswordMagicModel(Context context, Integer puzzleid) {
+
+        this.daoFactory = new DAOFactory(context);
+        PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
+
+        this.puzzle = puzzleDAO.find(puzzleid);
 
     }
 
@@ -103,6 +111,11 @@ public class CrosswordMagicModel extends AbstractModel {
         this.boxguess = box;
         Log.i("Model", String.valueOf(box));
         firePropertyChange(CrosswordMagicController.GUESS_BOX_PROPERTY, oldbox, box);
+    }
+    public void getPuzzleList() {
+        PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
+        PuzzleListItem[] puzzles = puzzleDAO.list();
+        firePropertyChange(CrosswordMagicController.PUZZLE_LIST_PROPERTY, null, puzzles);
     }
 
 }
